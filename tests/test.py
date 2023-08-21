@@ -36,4 +36,4 @@ if __name__ == '__main__':
     resp_str = resp.text
     print(resp_str)
     stock_data = parse(resp_str)
-    stock_data.report()
+    # stock_data.report()
