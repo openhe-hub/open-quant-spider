@@ -1,0 +1,29 @@
+[common]
+update_freq = 5.0 # update once in x secs
+save_freq = 5.0 # save once in x secs
+morning_begin_time = 09:30:00
+morning_end_time = 11:30:00
+afternoon_begin_time = 13:00:00
+afternoon_end_time = 15:00:00
+
+[stock]
+track_list = ["sh601002", "sh601001"]
+
+[spider]
+sources = ["tencent", "sina", "xueqiu"]
+default_source = "tencent"
+
+[database]
+auto_sync = true
+
+[database.redis]
+host = "127.0.0.1"
+port = 6379
+default_database_id = 0
+
+[database.mysql]
+host = ""
+port = 0
+user = "root"
+password = "5f6e778dx"
+
