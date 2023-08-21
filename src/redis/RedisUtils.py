@@ -4,8 +4,10 @@ from src.model.StockData import StockData
 
 
 class RedisUtils:
-    def __init__(self):
-        self.pool = ConnectionPool(host='127.0.0.1', port=6379, db=0)
+    def __init__(self, config: dict):
+        redis_config = config['database']['redis']
+        self.pool = ConnectionPool(host=redis_config['host'], port=redis_config['port'],
+                                   db=redis_config['default_database_id'])
         self.redis_handler = Redis(connection_pool=self.pool)
 
     def save_stock_data(self, stock_data: StockData):

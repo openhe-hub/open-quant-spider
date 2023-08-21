@@ -10,9 +10,9 @@ from src.spider.DataSourceManager import DataSourceManager
 
 
 class DataService:
-    def __init__(self):
+    def __init__(self, config: dict):
         self.stock_data: dict[str, StockData] = {}
-        self.redisUtils = RedisUtils()
+        self.redisUtils = RedisUtils(config)
 
     def run_redis_saver(self, data_source: DataSourceManager):
         for key in data_source.data.keys():

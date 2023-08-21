@@ -10,10 +10,10 @@ from src.spider.DataSourceManager import DataSourceManager
 
 
 class MainService:
-    def __init__(self):
-        self.spider_service = SpiderService()
-        self.data_service = DataService()
-        self.data_source_manager = DataSourceManager('tencent')
+    def __init__(self, config: dict):
+        self.spider_service = SpiderService(config)
+        self.data_service = DataService(config)
+        self.data_source_manager = DataSourceManager(config)
 
     def exec_loop(self):
         print("=== OPEN QUANT SPIDER BEGIN RUNNING ===")

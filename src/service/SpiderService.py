@@ -9,7 +9,7 @@ from src.spider.DataSourceManager import DataSourceManager
 
 
 class SpiderService:
-    def __init__(self):
+    def __init__(self, config: dict):
         self.stock_data: dict[str, StockData] = {}
 
     def run_spider(self, data_source: DataSourceManager):
