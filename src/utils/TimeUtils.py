@@ -29,6 +29,10 @@ class TimeUtils:
         self.time_point = TimePoint(config)
         self.period = MarketPeriod.NULL
 
+    def is_market_on(self) -> bool:
+        session = self.get_curr_period()
+        return session == MarketPeriod.MORNING_TRADE_SESSION or session == MarketPeriod.AFTERNOON_TRADE_SESSION
+
     def get_curr_period(self) -> MarketPeriod:
         if self.if_market_off():
             return MarketPeriod.MARKET_CLOSED

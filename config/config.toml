@@ -14,7 +14,7 @@ sources = ["tencent", "sina", "xueqiu"]
 default_source = "tencent"
 
 [database]
-auto_sync = true
+auto_sync_on = true
 
 [database.redis]
 host = "127.0.0.1"
@@ -22,8 +22,9 @@ port = 6379
 default_database_id = 0
 
 [database.mysql]
-host = ""
-port = 0
+host = "localhost"
+port = 3306
 user = "root"
 password = "5f6e778dx"
+db = "open_quant"
 

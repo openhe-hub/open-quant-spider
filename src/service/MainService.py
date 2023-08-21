@@ -7,13 +7,15 @@ from src.model.StockData import StockData
 from src.service.DataService import DataService
 from src.service.SpiderService import SpiderService
 from src.spider.DataSourceManager import DataSourceManager
+from src.utils.TimeUtils import TimeUtils
 
 
 class MainService:
     def __init__(self, config: dict):
-        self.spider_service = SpiderService(config)
-        self.data_service = DataService(config)
-        self.data_source_manager = DataSourceManager(config)
+        self.spider_service: SpiderService = SpiderService(config)
+        self.data_service: DataService = DataService(config)
+        self.data_source_manager: DataSourceManager = DataSourceManager(config)
+        self.time_utils: TimeUtils = TimeUtils(config)
 
     def exec_loop(self):
         print("=== OPEN QUANT SPIDER BEGIN RUNNING ===")
