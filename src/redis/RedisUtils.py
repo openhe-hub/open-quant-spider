@@ -23,16 +23,7 @@ class RedisUtils:
 
     def export_stock_data(self) -> dict[str, list[StockData]]:
         # found cache keys
-        pattern = 'open-quant-spider:*'
-        cursor = 0
-        key_list: list[str] = []
-        while True:
-            cursor, keys = self.redis_handler.scan(cursor, match=pattern)
-            for key in keys:
-                key_list.append(key.decode('utf-8'))
-
-            if cursor == 0:
-                break
+        key_list = self.find_all_keys()
         # query & collect
         res: dict[str, list[StockData]] = {}
         for key in key_list:
@@ -56,3 +47,23 @@ class RedisUtils:
                 res[stock_id] = [stock_data]
 
         return res
+
+    def clear_cache(self):
+        key_list = self.find_all_keys()
+        # rm
+        for key in key_list:
+            self.redis_handler.delete(key)
+
+    def find_all_keys(self) -> list[str]:
+        # found cache keys
+        pattern = 'open-quant-spider:*'
+        cursor = 0
+        key_list: list[str] = []
+        while True:
+            cursor, keys = self.redis_handler.scan(cursor, match=pattern)
+            for key in keys:
+                key_list.append(key.decode('utf-8'))
+
+            if cursor == 0:
+                break
+        return key_list

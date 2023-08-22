@@ -38,6 +38,8 @@ class DataService:
 
     def migrate_data(self):
         stock_data_list = self.redis_utils.export_stock_data()
+        self.mysql_utils.sync_stock_data(stock_data_list)
+        self.redis_utils.clear_cache()
 
     def exec_loop(self, data_source: DataSourceManager, time_utils: TimeUtils):
         while True:
@@ -49,5 +51,6 @@ class DataService:
                 print("=== begin migrating data ===")
                 self.migrate_data()
                 self.is_sync = True
+                print("=== end migrating data ===")
 
             time.sleep(10)
