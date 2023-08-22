@@ -48,6 +48,7 @@ class RedisUtils:
             stock_data.name = hash_data_decoded['name']
             stock_data.price = hash_data_decoded['price']
             stock_data.timestamp = hash_data_decoded['timestamp']
+            stock_data.trading_volume = hash_data_decoded['trading_volume']
             # map
             if stock_id in res.keys():
                 res[stock_id].append(stock_data)

@@ -5,6 +5,7 @@ import schedule
 from src.model.StockData import StockData
 from schedule import every, repeat
 
+from src.mysql.MysqlUtils import MysqlUtils
 from src.redis.RedisUtils import RedisUtils
 from src.spider.DataSourceManager import DataSourceManager
 from src.utils.TimeUtils import TimeUtils, MarketPeriod
@@ -14,6 +15,7 @@ class DataService:
     def __init__(self, config: dict):
         self.stock_data: dict[str, StockData] = {}
         self.redis_utils: RedisUtils = RedisUtils(config)
+        self.mysql_utils: MysqlUtils = MysqlUtils(config)
         self.enable_sync: bool = config["database"]["auto_sync_on"]
         self.is_sync: bool = False
 
@@ -35,7 +37,7 @@ class DataService:
             self.redis_utils.save_stock_data(data_source.data[key])
 
     def migrate_data(self):
-        pass
+        stock_data_list = self.redis_utils.export_stock_data()
 
     def exec_loop(self, data_source: DataSourceManager, time_utils: TimeUtils):
         while True:
