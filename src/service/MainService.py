@@ -19,7 +19,7 @@ class MainService:
 
     def exec_loop(self):
         print("=== OPEN QUANT SPIDER BEGIN RUNNING ===")
-        spider_thread = Thread(target=self.spider_service.exec_loop, args=[self.data_source_manager])
-        data_thread = Thread(target=self.data_service.exec_loop, args=[self.data_source_manager])
+        spider_thread = Thread(target=self.spider_service.exec_loop, args=[self.data_source_manager, self.time_utils])
+        data_thread = Thread(target=self.data_service.exec_loop, args=[self.data_source_manager, self.time_utils])
         spider_thread.start()
         data_thread.start()

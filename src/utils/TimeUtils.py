@@ -30,8 +30,8 @@ class TimeUtils:
         self.period = MarketPeriod.NULL
 
     def is_market_on(self) -> bool:
-        session = self.get_curr_period()
-        return session == MarketPeriod.MORNING_TRADE_SESSION or session == MarketPeriod.AFTERNOON_TRADE_SESSION
+        market_period = self.get_curr_period()
+        return market_period == MarketPeriod.MORNING_TRADE_SESSION or market_period == MarketPeriod.AFTERNOON_TRADE_SESSION
 
     def get_curr_period(self) -> MarketPeriod:
         if self.if_market_off():
@@ -57,10 +57,10 @@ class TimeUtils:
 
     def if_market_off(self) -> bool:
         today = datetime.now().strftime('%Y%m%d')
-        holiday_api = f"http://api.goseek.cn/Tools/holiday?date={today}"
+        holiday_api = f"http://www.easybots.cn/api/holiday.php?d={today}"
         resp = requests.get(holiday_api)
         json_data = resp.json()
-        is_holiday = json_data["data"] in [1, 2]
+        is_holiday = int(json_data[today])
         if is_holiday == 0:  # workday && Mon ~ Fri
             return datetime.now().weekday() < 5
         elif is_holiday == 1:  # holiday

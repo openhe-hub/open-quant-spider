@@ -20,3 +20,6 @@ class RedisUtils:
             'timestamp': stock_data.timestamp
         }
         self.redis_handler.hmset(key, value)
+
+    def export_stock_data(self, stock_data_list: dict[str, list[StockData]]):
+        pass
