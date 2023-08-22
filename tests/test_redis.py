@@ -1,6 +1,13 @@
 import redis
 
+from src.redis.RedisUtils import RedisUtils
+from src.utils.Configuration import Configuration
+
+
+def test_export_data():
+    redis_utils = RedisUtils(Configuration().config_dict)
+    print(redis_utils.export_stock_data())
+
+
 if __name__ == '__main__':
-    pool = redis.ConnectionPool(host="127.0.0.1", port=6379)
-    redisHandler = redis.Redis(connection_pool=pool)
-    redisHandler.set('py-redis', '1')
+    test_export_data()

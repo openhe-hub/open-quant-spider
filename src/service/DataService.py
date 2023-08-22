@@ -42,7 +42,9 @@ class DataService:
             self.update_sync_status(time_utils)
             if time_utils.is_market_on():
                 self.run_redis_saver(data_source)
+                print("save stock data to redis once")
             elif not self.is_sync:
+                print("=== begin migrating data ===")
                 self.migrate_data()
                 self.is_sync = True
 

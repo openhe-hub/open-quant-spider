@@ -20,4 +20,5 @@ class SpiderService:
     def exec_loop(self, data_source: DataSourceManager, time_utils: TimeUtils):
         while True:
             self.run_spider(data_source, time_utils)
+            print("get stock data once")
             time.sleep(10)

@@ -62,9 +62,9 @@ class TimeUtils:
         json_data = resp.json()
         is_holiday = int(json_data[today])
         if is_holiday == 0:  # workday && Mon ~ Fri
-            return datetime.now().weekday() < 5
+            return datetime.now().weekday() >= 5
         elif is_holiday == 1:  # holiday
-            return False
+            return True
         else:
             print(f"Err: cannot judge market status, data = {json_data}")
-            return False
+            return True
